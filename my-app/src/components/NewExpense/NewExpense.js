@@ -4,9 +4,13 @@ import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
 function NewExpense(props) {
+    function onSaveExpense(newExpenseData) {
+        console.log(newExpenseData);
+    }
+
     return (
         <div className="new-expense">
-            <ExpenseForm></ExpenseForm>
+            <ExpenseForm onSaveExpense={onSaveExpense}></ExpenseForm>
         </div>
     )
 }
