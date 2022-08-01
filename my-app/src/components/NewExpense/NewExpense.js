@@ -5,7 +5,7 @@ import './NewExpense.css';
 
 function NewExpense(props) {
     function onSaveExpense(newExpenseData) {
-        console.log(newExpenseData);
+        props.addExpenseHandler(newExpenseData);
     }
 
     return (
