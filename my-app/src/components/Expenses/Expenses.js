@@ -4,7 +4,6 @@ import Card from '../UI/Card';
 import './Expenses.css';
 
 function Expenses(props) {
-    console.log(props.items);
     return (
         <Card className="expenses">
             {props.items.map((expense) => { return (
