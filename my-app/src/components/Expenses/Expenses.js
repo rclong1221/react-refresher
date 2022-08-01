@@ -17,17 +17,21 @@ function Expenses(props) {
         return expense.date.getFullYear().toString() === year;
     });
 
+    const mappedExpenses = filteredExpenses.map((expense) => { return (
+        <ExpenseItem 
+        key={expense.id}
+        date={expense.date}
+        title={expense.title}
+        amount={expense.amount}
+    ></ExpenseItem>
+    )});
+
+    const noExpenses = <p>No expenses found.</p>;
+
     return (
         <Card className="expenses">
             <ExpensesFilter onFilterHandler={onFilterHandler}></ExpensesFilter>
-            {filteredExpenses.map((expense) => { return (
-                <ExpenseItem 
-                key={expense.id}
-                date={expense.date}
-                title={expense.title}
-                amount={expense.amount}
-            ></ExpenseItem>
-            )})}
+            {filteredExpenses.length === 0 ? noExpenses : mappedExpenses}
         </Card>
     )
 }
