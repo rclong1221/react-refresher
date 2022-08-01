@@ -38,7 +38,12 @@ function ExpenseForm(props) {
 
     function submitHandler(e) {
         e.preventDefault();
-        props.onSaveExpense(userInput);
+        props.onSaveExpense({
+            id: 'e' + Math.random(),
+            title: userInput.enteredTitle,
+            amount: parseFloat(userInput.enteredAmount),
+            date: new Date(userInput.enteredDate)
+        });
         setUserInput({
             enteredTitle: '',
             enteredAmount: '',

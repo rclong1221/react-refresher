@@ -4,23 +4,17 @@ import Card from '../UI/Card';
 import './Expenses.css';
 
 function Expenses(props) {
+    console.log(props.items);
     return (
         <Card className="expenses">
-            <ExpenseItem 
-                date={props.items[0].date}
-                title={props.items[0].title}
-                amount={props.items[0].amount}
+            {props.items.map((expense) => { return (
+                <ExpenseItem 
+                key={expense.id}
+                date={expense.date}
+                title={expense.title}
+                amount={expense.amount}
             ></ExpenseItem>
-            <ExpenseItem 
-                date={props.items[1].date}
-                title={props.items[1].title}
-                amount={props.items[1].amount}
-            ></ExpenseItem>
-            <ExpenseItem 
-                date={props.items[2].date}
-                title={props.items[2].title}
-                amount={props.items[2].amount}
-            ></ExpenseItem>
+            )})}
         </Card>
     )
 }
