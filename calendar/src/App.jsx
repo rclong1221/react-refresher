@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
+import MyCalendar from './components/Calendar/Calendar';
 import Header from './components/Header';
 
 const EVENTS = [
@@ -110,6 +111,7 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
+      <MyCalendar events={events}></MyCalendar>
     </div>
   )
 }
