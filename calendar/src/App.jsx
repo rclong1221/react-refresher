@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import reactLogo from './assets/react.svg';
+import './App.css';
 
 import MyCalendar from './components/Calendar/Calendar';
-import Header from './components/Header';
+import Layout from './components/Layout/Layout';
+import StartingPageContent from './components/StartingPage/StartingPageContent';
 
 const EVENTS = [
   {
@@ -109,10 +111,19 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header></Header>
-      <MyCalendar events={events}></MyCalendar>
-    </div>
+    <Layout>
+      <Switch>
+        <Route path='/' exact>
+          <StartingPageContent />
+        </Route>
+        <Route path='/calendar'>
+          <MyCalendar events={events}></MyCalendar>
+        </Route>
+        <Route path='auth'>
+
+        </Route>
+      </Switch>
+    </Layout>
   )
 }
 
