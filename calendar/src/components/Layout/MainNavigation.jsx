@@ -17,6 +17,9 @@ const MainNavigation = () => {
             <Link to='/profile'>Profile</Link>
           </li>
           <li>
+            <Link to='/calendar'>Calendar</Link>
+          </li>
+          <li>
             <button>Logout</button>
           </li>
         </ul>
