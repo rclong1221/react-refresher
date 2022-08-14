@@ -1,19 +1,21 @@
 .header {
-  width: 100%;
+  width: 100vw;
   height: 5rem;
   background-color: #38015c;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .logo {
   font-family: 'Lato', sans-serif;
   font-size: 2rem;
   color: white;
-  margin: 0;
+  margin: 0px 16px;
 }
 
 .header ul {
