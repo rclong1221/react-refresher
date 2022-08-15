@@ -100,6 +100,7 @@ const EVENTS = [
 
 function App() {
   const [events, setEvents] = useState(EVENTS)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     console.log("SET EVENTS");
@@ -109,9 +110,10 @@ function App() {
       console.log("CLEANUP");
     }
   }, []);
+  
 
   return (
-    <Layout>
+    <Layout isLoggedIn={isLoggedIn}>
       <Switch>
         <Route path='/' exact>
           <StartingPageContent />
@@ -120,7 +122,6 @@ function App() {
           <MyCalendar events={events}></MyCalendar>
         </Route>
         <Route path='auth'>
-
         </Route>
       </Switch>
     </Layout>
