@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import mainLogo from'../../assets/fudee-white.png';
+
 import classes from './MainNavigation.module.css';
 
 const MainNavigation = (props) => {
@@ -16,7 +18,9 @@ const MainNavigation = (props) => {
   return (
     <header className={classes.header}>
       <Link to='/'>
-        <div className={classes.logo}>React Auth</div>
+        <div className={classes.logo}>
+          <img src={mainLogo} alt="fudee"/>
+        </div>
       </Link>
       <nav>
         <ul>
