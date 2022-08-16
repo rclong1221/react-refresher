@@ -1,7 +1,7 @@
 .header {
   width: 100vw;
   height: 5rem;
-  background-color: #38015c;
+  background-color: #FA7272;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
@@ -16,6 +16,11 @@
   font-size: 2rem;
   color: white;
   margin: 0px 16px;
+}
+
+.logo img {
+  width: 150px;
+  height: 60px;
 }
 
 .header ul {
