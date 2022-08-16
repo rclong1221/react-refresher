@@ -6,6 +6,7 @@ import './App.css';
 import MyCalendar from './components/Calendar/Calendar';
 import Layout from './components/Layout/Layout';
 import StartingPageContent from './components/StartingPage/StartingPageContent';
+import AuthForm from './components/Auth/AuthForm';
 
 const EVENTS = [
   {
@@ -121,7 +122,8 @@ function App() {
         <Route path='/calendar'>
           <MyCalendar events={events}></MyCalendar>
         </Route>
-        <Route path='auth'>
+        <Route path='/auth'>
+          <AuthForm></AuthForm>
         </Route>
       </Switch>
     </Layout>
