@@ -11,6 +11,11 @@ const MainNavigation = (props) => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
 
+  const logoutHandler = () => {
+    authCtx.logout();
+    // optional: redirect the user
+  };
+
   let _login = <ul>
     <li>
       <Link to='/auth'>
@@ -27,7 +32,7 @@ const MainNavigation = (props) => {
         <Link to='/calendar'>Calendar</Link>
       </li>
       <li>
-        <button>Logout</button>
+        <button onClick={logoutHandler}>Logout</button>
       </li>
     </ul>;
 
