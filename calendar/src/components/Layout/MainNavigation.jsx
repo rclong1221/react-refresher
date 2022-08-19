@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import AuthContext from '../../store/auth-context';
 
 import mainLogo from'../../assets/fudee-white.png';
 
 import classes from './MainNavigation.module.css';
 
 const MainNavigation = (props) => {
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+
   let _login = <ul>
     <li>
       <Link to='/auth'>
@@ -34,7 +40,7 @@ const MainNavigation = (props) => {
       </Link>
       <nav>
         <ul>
-          {props.isLoggedIn ? _logout : _login }
+          {isLoggedIn ? _logout : _login }
         </ul>
       </nav>
     </header>
