@@ -95,11 +95,11 @@ const RegisterForm = (props) => {
         </div>
         <div className={classes.control}>
           <label htmlFor='password1'>Your Password</label>
-          <input type='password1' id='password1' required ref={password1InputRef} />
+          <input type='password' id='password1' required ref={password1InputRef} />
         </div>
         <div className={classes.control}>
           <label htmlFor='password2'>Your Password</label>
-          <input type='password2' id='password2' required ref={password2InputRef} />
+          <input type='password' id='password2' required ref={password2InputRef} />
         </div>
         <div className={classes.actions}>
           <button onClick={submitHandler}>Create Account</button>
