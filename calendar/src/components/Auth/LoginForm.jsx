@@ -76,12 +76,12 @@ const LoginForm = (props) => {
       <h1>Login</h1>
       <form>
         <div className={classes.control}>
-          <label htmlFor='username'>Your Username</label>
+          <label htmlFor='username'>Username</label>
           <input type='username' id='username' required ref={usernameInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='password1'>Your Password</label>
-          <input type='password1' id='password1' required ref={password1InputRef} />
+          <label htmlFor='password1'>Password</label>
+          <input type='password' id='password1' required ref={password1InputRef} />
         </div>
         <div className={classes.actions}>
           <button onClick={submitHandler}>Login</button>
