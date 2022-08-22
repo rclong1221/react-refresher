@@ -86,19 +86,19 @@ const RegisterForm = (props) => {
       <h1>Sign Up</h1>
       <form>
         <div className={classes.control}>
-          <label htmlFor='username'>Your Username</label>
+          <label htmlFor='username'>Username</label>
           <input type='username' id='username' required ref={usernameInputRef} />
         </div>
         <div className={classes.control}>
-            <label htmlFor='email'>Your Email</label>
+            <label htmlFor='email'>Email</label>
             <input type='email' id='email' required ref={emailInputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='password1'>Your Password</label>
+          <label htmlFor='password1'>Password</label>
           <input type='password' id='password1' required ref={password1InputRef} />
         </div>
         <div className={classes.control}>
-          <label htmlFor='password2'>Your Password</label>
+          <label htmlFor='password2'>Confirm Password</label>
           <input type='password' id='password2' required ref={password2InputRef} />
         </div>
         <div className={classes.actions}>
