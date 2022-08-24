@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import reactLogo from './assets/react.svg';
 import './App.css';
@@ -7,6 +7,7 @@ import MyCalendar from './components/Calendar/Calendar';
 import Layout from './components/Layout/Layout';
 import StartingPageContent from './components/StartingPage/StartingPageContent';
 import AuthForm from './components/Auth/AuthForm';
+import AuthContext from './store/auth-context';
 
 const EVENTS = [
   {
@@ -100,8 +101,10 @@ const EVENTS = [
 ]
 
 function App() {
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
+
   const [events, setEvents] = useState(EVENTS)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     console.log("SET EVENTS");
@@ -114,7 +117,7 @@ function App() {
   
 
   return (
-    <Layout isLoggedIn={isLoggedIn}>
+    <Layout>
       <Switch>
         <Route path='/' exact>
           <StartingPageContent />

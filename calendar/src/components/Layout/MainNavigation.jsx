@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
 
@@ -7,13 +7,15 @@ import mainLogo from'../../assets/fudee-white.png';
 
 import classes from './MainNavigation.module.css';
 
-const MainNavigation = (props) => {
+const MainNavigation = () => {
   const authCtx = useContext(AuthContext);
+  const history = useHistory();
   const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandler = () => {
     authCtx.logout();
     // optional: redirect the user
+    history.replace('/');
   };
 
   let _login = <ul>
