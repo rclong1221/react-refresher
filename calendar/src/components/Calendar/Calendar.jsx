@@ -28,7 +28,7 @@ function MyCalendar(props) {
             endAccessor="end"
           /> 
         </div> : 
-        history.replace('/')
+        history.replace('/auth')
       }  
     </>
   );
