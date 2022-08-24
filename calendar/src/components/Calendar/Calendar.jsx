@@ -1,6 +1,10 @@
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import '../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import AuthContext from '../../store/auth-context';
 
 import './Calendar.css';
 
@@ -9,15 +13,24 @@ import './Calendar.css';
 const localizer = momentLocalizer(moment) // or globalizeLocalizer
 
 function MyCalendar(props) {
+  const authCtx = useContext(AuthContext);
+  const history = useHistory();
+  const isLoggedIn = authCtx.isLoggedIn;
+
   return (
-    <div className="myCustomHeight">
-        <Calendar
+    <>
+      { 
+        isLoggedIn ? <div className="myCustomHeight">
+          <Calendar
             localizer={localizer}
             events={props.events}
             startAccessor="start"
             endAccessor="end"
-        />
-    </div>
+          /> 
+        </div> : 
+        history.replace('/')
+      }  
+    </>
   );
 }
 
