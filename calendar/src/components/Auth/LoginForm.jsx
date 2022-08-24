@@ -64,7 +64,7 @@ const LoginForm = (props) => {
         
         console.log(expirationTime.toISOString());
         authCtx.login(d.key, expirationTime.toISOString());
-        history.replace('/');
+        history.replace('/calendar/');
       })
       .catch((err) => {
         alert(err.message);
