@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import AuthContext from '../../store/auth-context';
 
-import './Calendar.css';
+import classes from './Calendar.module.css';
 
 // Setup the localizer by providing the moment (or globalize, or Luxon) Object
 // to the correct localizer.
@@ -20,7 +20,7 @@ function MyCalendar(props) {
   return (
     <>
       { 
-        isLoggedIn ? <div className="myCustomHeight">
+        isLoggedIn ? <div className={classes.myCustomHeight}>
           <Calendar
             localizer={localizer}
             events={props.events}

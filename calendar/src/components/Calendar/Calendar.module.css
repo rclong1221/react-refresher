@@ -1,0 +1,7 @@
+/* @import '../../../node_modules/react-big-calendar/lib/sass/styles';
+@import '../../../node_modules/react-big-calendar/lib/addons/dragAndDrop/styles'; // if using DnD */
+
+.myCustomHeight {
+    height: 80vh;
+    width: 100vw;
+}
