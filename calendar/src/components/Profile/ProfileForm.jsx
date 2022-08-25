@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { useContext } from 'react';
-import { useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
 import classes from './ProfileForm.module.css';
@@ -20,6 +18,37 @@ const ProfileForm = () => {
   const switchAuthModeHandler = () => {
     props.switchAuthModeHandler();
   }
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/users/803981b7-a755-4719-9321-9190d8878ed5/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 54438e4191f37f626c664048407577962b08c393'
+      },
+    })
+      .then((res) => {
+        setIsLoading(false);
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((resp) => {
+            let errorMessage = 'authentication failed!';
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .then((d) => {
+        usernameInputRef.current.value = d.username;
+        nameInputRef.current.value = d.name;
+        firstNameInputRef.current.value = d.first_name;
+        lastNameInputRef.current.value = d.last_name;
+        middleNameInputRef.current.value = d.middle_name;
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, [])
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -43,9 +72,6 @@ const ProfileForm = () => {
         "middle_name": enteredMiddleName
     }
 
-    console.log(data);
-    
-
     fetch(url, {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -62,16 +88,12 @@ const ProfileForm = () => {
         } else {
           return res.json().then((resp) => {
             let errorMessage = 'Authentication failed!';
-            // if (resp && resp.error && resp.error.message) {
-            //   errorMessage = resp.error.message;
-            // }
-
             throw new Error(errorMessage);
           });
         }
       })
       .then((d) => {
-        alert(d);
+        alert("Profile updated!");
       })
       .catch((err) => {
         alert(err.message);
