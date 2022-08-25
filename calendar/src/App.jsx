@@ -8,6 +8,7 @@ import Layout from './components/Layout/Layout';
 import StartingPageContent from './components/StartingPage/StartingPageContent';
 import AuthForm from './components/Auth/AuthForm';
 import AuthContext from './store/auth-context';
+import UserProfile from './components/Profile/UserProfile';
 
 const EVENTS = [
   {
@@ -127,6 +128,9 @@ function App() {
         </Route>
         <Route path='/auth'>
           <AuthForm></AuthForm>
+        </Route>
+        <Route path='/profile'>
+          <UserProfile></UserProfile>
         </Route>
       </Switch>
     </Layout>
