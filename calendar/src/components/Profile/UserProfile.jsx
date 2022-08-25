@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
+import PasswordForm from './PasswordForm';
 import ProfileForm from './ProfileForm';
+import ProfilePhotoForm from './ProfilePhotoForm';
 import classes from './UserProfile.module.css';
 
 const UserProfile = () => {
@@ -13,8 +15,9 @@ const UserProfile = () => {
     <>
       { isLoggedIn ? 
         <section className={classes.profile}>
-          <h1>Profile</h1>
+          <ProfilePhotoForm />
           <ProfileForm />
+          <PasswordForm />
         </section> :
         history.replace('/auth')
       }
