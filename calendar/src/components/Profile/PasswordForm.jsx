@@ -9,6 +9,7 @@ const PasswordForm = () => {
   const password2InputRef = useRef();
 
   const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +37,7 @@ const PasswordForm = () => {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token 54438e4191f37f626c664048407577962b08c393'
+        'Authorization': `Token ${token}`
       },
     })
       .then((res) => {
@@ -46,8 +47,7 @@ const PasswordForm = () => {
           return res.json();
         } else {
           return res.json().then((resp) => {
-            let errorMessage = 'Authentication failed!';
-            throw new Error(errorMessage);
+            throw new Error(resp.new_password2[0]);
           });
         }
       })
@@ -66,7 +66,7 @@ const PasswordForm = () => {
         <input type='password' id='new-password1' ref={password1InputRef}/>
       </div>
       <div className={classes.control}>
-        <label htmlFor='new-password2'>New Password</label>
+        <label htmlFor='new-password2'>Confirm Password</label>
         <input type='password' id='new-password2' ref={password2InputRef}/>
       </div>
       <div className={classes.action}>

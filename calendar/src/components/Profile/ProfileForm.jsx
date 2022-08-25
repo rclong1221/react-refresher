@@ -12,6 +12,7 @@ const ProfileForm = () => {
   const middleNameInputRef = useRef();
 
   const authCtx = useContext(AuthContext);
+  const token = authCtx.token;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,7 +25,7 @@ const ProfileForm = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token 54438e4191f37f626c664048407577962b08c393'
+        'Authorization': `Token ${token}`
       },
     })
       .then((res) => {
@@ -99,7 +100,6 @@ const ProfileForm = () => {
         alert(err.message);
       });
   };
-
 
   return (
     <form className={classes.form}>
