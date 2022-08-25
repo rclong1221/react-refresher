@@ -1,18 +1,76 @@
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import AuthContext from '../../store/auth-context';
 import classes from './PasswordForm.module.css';
 
 const PasswordForm = () => {
+  const history = useHistory();
+  const password1InputRef = useRef();
+  const password2InputRef = useRef();
+
+  const authCtx = useContext(AuthContext);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const switchAuthModeHandler = () => {
+    props.switchAuthModeHandler();
+  }
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const enteredPassword1 = password1InputRef.current.value;
+    const enteredPassword2 = password2InputRef.current.value;
+
+    // optional: Add validation
+    setIsLoading(true);
+
+    let url = 'http://127.0.0.1:8000/rest-auth/password/change/';
+    let data = {
+        "new_password1": enteredPassword1,
+        "new_password2": enteredPassword2,
+    }
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 54438e4191f37f626c664048407577962b08c393'
+      },
+    })
+      .then((res) => {
+        setIsLoading(false);
+        if (res.ok) {
+          alert(res);
+          return res.json();
+        } else {
+          return res.json().then((resp) => {
+            let errorMessage = 'Authentication failed!';
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .then((d) => {
+        alert("Profile updated!");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
   return (
     <form className={classes.form}>
       <div className={classes.control}>
         <label htmlFor='new-password1'>New Password</label>
-        <input type='password' id='new-password1' />
+        <input type='password' id='new-password1' ref={password1InputRef}/>
       </div>
       <div className={classes.control}>
         <label htmlFor='new-password2'>New Password</label>
-        <input type='password' id='new-password2' />
+        <input type='password' id='new-password2' ref={password2InputRef}/>
       </div>
       <div className={classes.action}>
-        <button>Change Password</button>
+        <button onClick={submitHandler}>Change Password</button>
       </div>
     </form>
   );
