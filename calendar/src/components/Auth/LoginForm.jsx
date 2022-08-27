@@ -62,7 +62,7 @@ const LoginForm = (props) => {
 
       expirationTime.setTime(expirationTime.getTime() + numOfHours * 60 * 60 * 1000);
       
-      authCtx.login(token, expirationTime.toISOString());
+      
 
       fetch('http://127.0.0.1:8000/api/users/me/', {
         method: 'GET',
@@ -83,7 +83,9 @@ const LoginForm = (props) => {
         }
       }).then((user) => {
         authCtx.user = user;
-  
+        
+        authCtx.login(token, expirationTime.toISOString(), user);
+
         history.replace('/calendar/');
       }).catch((err) => {
         alert(err.message);
