@@ -38,37 +38,59 @@ const LoginForm = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
+    }).then((res) => {
+      setIsLoading(false);
+      if (res.ok) {
+        return res.json();
+      } else {
+        return res.json().then((resp) => {
+          let errorMessage = 'Authentication failed!';
+          // if (resp && resp.error && resp.error.message) {
+          //   errorMessage = resp.error.message;
+          // }
+
+          throw new Error(errorMessage);
+        });
+      }
+    }).then((d) => {
+      const numOfHours = 4;
+      const expirationTime = new Date(
+        new Date().getTime()
+      );
+      
+      const token = d.key;
+
+      expirationTime.setTime(expirationTime.getTime() + numOfHours * 60 * 60 * 1000);
+      
+      authCtx.login(token, expirationTime.toISOString());
+
+      fetch('http://127.0.0.1:8000/api/users/me/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+      }).then((res) => {
         setIsLoading(false);
         if (res.ok) {
           return res.json();
         } else {
           return res.json().then((resp) => {
             let errorMessage = 'Authentication failed!';
-            // if (resp && resp.error && resp.error.message) {
-            //   errorMessage = resp.error.message;
-            // }
-
+  
             throw new Error(errorMessage);
           });
         }
-      })
-      .then((d) => {
-        const numOfHours = 4;
-        const expirationTime = new Date(
-          new Date().getTime()
-        );
-
-        expirationTime.setTime(expirationTime.getTime() + numOfHours * 60 * 60 * 1000);
-        
-        console.log(expirationTime.toISOString());
-        authCtx.login(d.key, expirationTime.toISOString());
+      }).then((user) => {
+        authCtx.user = user;
+  
         history.replace('/calendar/');
-      })
-      .catch((err) => {
+      }).catch((err) => {
         alert(err.message);
       });
+    }).catch((err) => {
+      alert(err.message);
+    });
   };
 
   return (
