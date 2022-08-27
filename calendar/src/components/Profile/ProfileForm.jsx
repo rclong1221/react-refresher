@@ -13,6 +13,7 @@ const ProfileForm = () => {
 
   const authCtx = useContext(AuthContext);
   const token = authCtx.token;
+  const user = authCtx.user;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,7 +22,7 @@ const ProfileForm = () => {
   }
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/users/803981b7-a755-4719-9321-9190d8878ed5/', {
+    fetch(`http://127.0.0.1:8000/api/users/${user.uuid}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
