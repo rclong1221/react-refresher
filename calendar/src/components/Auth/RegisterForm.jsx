@@ -32,7 +32,6 @@ const RegisterForm = (props) => {
 
     setIsLoading(true);
 
-
     let url = 'http://127.0.0.1:8000/rest-auth/registration/';
     let data = {
         username: enteredUsername,
@@ -40,7 +39,6 @@ const RegisterForm = (props) => {
         password1: enteredPassword1,
         password2: enteredPassword2
     }
-    
 
     fetch(url, {
       method: 'POST',
@@ -55,26 +53,13 @@ const RegisterForm = (props) => {
           return res.json();
         } else {
           return res.json().then((resp) => {
-            let errorMessage = 'Authentication failed!';
-            // if (resp && resp.error && resp.error.message) {
-            //   errorMessage = resp.error.message;
-            // }
-
-            throw new Error(errorMessage);
+            console.log(resp);
+            throw new Error(resp);
           });
         }
       })
       .then((d) => {
-        const numOfHours = 4;
-        const expirationTime = new Date(
-          new Date().getTime()
-        );
-
-        expirationTime.setTime(expirationTime.getTime() + numOfHours * 60 * 60 * 1000);
-        
-        console.log(expirationTime.toISOString());
-        authCtx.login(d.key, expirationTime.toISOString());
-        history.replace('/');
+        history.replace('/confirm-email/');
       })
       .catch((err) => {
         alert(err.message);
