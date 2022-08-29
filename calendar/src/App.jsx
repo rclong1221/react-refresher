@@ -11,6 +11,7 @@ import AuthContext from './store/auth-context';
 import UserProfile from './components/Profile/UserProfile';
 import EmailConfirm from './components/Auth/EmailConfirm';
 import EmailConfirmation from './components/Auth/EmailConfirmation';
+import ResendConfirmationForm from './components/Auth/ResendConfirmation/ResendConfirmationForm';
 
 const EVENTS = [
   {
@@ -139,6 +140,9 @@ function App() {
         </Route>
         <Route path='/email-confirmation'>
           <EmailConfirmation></EmailConfirmation>
+        </Route>
+        <Route path='/resend-confirmation'>
+          <ResendConfirmationForm></ResendConfirmationForm>
         </Route>
       </Switch>
     </Layout>
