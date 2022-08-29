@@ -9,6 +9,7 @@ import StartingPageContent from './components/StartingPage/StartingPageContent';
 import AuthForm from './components/Auth/AuthForm';
 import AuthContext from './store/auth-context';
 import UserProfile from './components/Profile/UserProfile';
+import EmailConfirm from './components/Auth/EmailConfirm';
 
 const EVENTS = [
   {
@@ -131,6 +132,9 @@ function App() {
         </Route>
         <Route path='/profile'>
           <UserProfile></UserProfile>
+        </Route>
+        <Route path='/confirm-email'>
+          <EmailConfirm></EmailConfirm>
         </Route>
       </Switch>
     </Layout>
