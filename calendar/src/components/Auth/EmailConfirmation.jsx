@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
 const EmailConfirmation = () => {
   const [emailConfirmed, setEmailConfirmed] = useState(false);
+  const history = useHistory();
 
   const authCtx = useContext(AuthContext);
   const user = authCtx.user;
@@ -31,6 +31,7 @@ const EmailConfirmation = () => {
         } else {
           console.log("NOT OKAY!")
           console.log(res.status);
+          history.replace('/resend-confirmation/');
           return res.json().then((resp) => {
             console.log(resp);
           });
