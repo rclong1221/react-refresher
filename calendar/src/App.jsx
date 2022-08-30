@@ -106,18 +106,43 @@ const EVENTS = [
 
 function App() {
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const token = authCtx.token;
 
-  const [events, setEvents] = useState(EVENTS)
+  console.log(token)
+
+  const [events, setEvents] = useState(EVENTS);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    console.log("SET EVENTS");
-    setEvents(EVENTS);
+    if (token) {
+      fetch('http://127.0.0.1:8000/api/users/me/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((resp) => {
+            let errorMessage = 'Authentication failed!';
+  
+            throw new Error(errorMessage);
+          });
+        }
+      }).then((user) => {
+        authCtx.setUser(user);
+        setIsLoaded(true);
+      }).catch((err) => {
+        alert(err.message);
+      });
+    }
 
     return () => {
       console.log("CLEANUP");
     }
-  }, []);
+  }, [token]);
   
 
   return (
