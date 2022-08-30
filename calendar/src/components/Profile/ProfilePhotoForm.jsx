@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
+import ProfilePhoto from './ProfilePhoto';
 import classes from './ProfilePhotoForm.module.css';
 
 const ProfilePhotoForm = () => {
@@ -65,6 +66,7 @@ const ProfilePhotoForm = () => {
     <form className={classes.form} encType='multipart/form-data'>
       <div className={classes.control}>
         <label htmlFor='profile-picture'>Profile Picture</label>
+        <ProfilePhoto></ProfilePhoto>
         <input type='file' id='profile-picture' ref={imageInputRef} />
       </div>
       <div className={classes.action}>
