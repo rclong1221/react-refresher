@@ -79,7 +79,7 @@ const ProfileForm = () => {
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token 54438e4191f37f626c664048407577962b08c393'
+        'Authorization': `Token ${token}`
       },
     })
       .then((res) => {
