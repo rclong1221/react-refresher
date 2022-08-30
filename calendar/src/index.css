@@ -26,6 +26,7 @@ a:hover {
 
 body {
   margin: 0;
+  margin-top: 2.5rem;
   display: flex;
   place-items: center;
   min-width: 100vw;

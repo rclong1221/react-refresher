@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
@@ -10,6 +11,10 @@ const UserProfile = () => {
   const authCtx = useContext(AuthContext);
   const history = useHistory();
   const isLoggedIn = authCtx.isLoggedIn;
+
+  useEffect(() => {
+    if (!isLoggedIn) history.replace('/auth');
+  }, [isLoggedIn])
 
   return (
     <>
