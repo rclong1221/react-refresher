@@ -17,12 +17,10 @@ const ProfileForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const switchAuthModeHandler = () => {
-    props.switchAuthModeHandler();
-  }
-
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/users/${user.uuid}/`, {
+    if (user) {
+      if (user.uuid) {
+      fetch(`http://127.0.0.1:8000/api/users/${user.uuid}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +48,10 @@ const ProfileForm = () => {
       .catch((err) => {
         alert(err.message);
       });
-  }, [])
+      }
+    }
+    
+  }, [user])
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -65,7 +66,7 @@ const ProfileForm = () => {
     setIsLoading(true);
 
 
-    let url = 'http://127.0.0.1:8000/api/users/803981b7-a755-4719-9321-9190d8878ed5/';
+    let url = `http://127.0.0.1:8000/api/users/${user.uuid}/`;
     let data = {
         "username": enteredUsername,
         "name": enteredName,

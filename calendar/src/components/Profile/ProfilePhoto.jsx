@@ -11,35 +11,37 @@ const ProfilePhoto = () => {
   const user = authCtx.user;
 
   useEffect(() => {
-    if (user.primary_image) {
-        fetch(`http://127.0.0.1:8000/api/user_image/${user.primary_image}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${token}`
-        },
-    })
-    .then((res) => {
-        if (res.ok) {
-        console.log(res);
-        return res.json();
-        } else {
-        return res.json().then((resp) => {
-            let errorMessage = 'Authentication failed!';
-            throw new Error(errorMessage);
-        });
-        }
-    })
-    .then((d) => {
-        console.log(d);
-        setProfilePhoto(`http://127.0.0.1:8000${d.image}`);
-    })
-    .catch((err) => {
-        alert(err.message);
-    });
+    if (user) {
+      if (user.primary_image) {
+          fetch(`http://127.0.0.1:8000/api/user_image/${user.primary_image}`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Token ${token}`
+          },
+      })
+      .then((res) => {
+          if (res.ok) {
+          console.log(res);
+          return res.json();
+          } else {
+          return res.json().then((resp) => {
+              let errorMessage = 'Authentication failed!';
+              throw new Error(errorMessage);
+          });
+          }
+      })
+      .then((d) => {
+          console.log(d);
+          setProfilePhoto(`http://127.0.0.1:8000${d.image}`);
+      })
+      .catch((err) => {
+          alert(err.message);
+      });
+      }
     }
   
-  }, []);
+  }, [user]);
 
   return (
     <>
