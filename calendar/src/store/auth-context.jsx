@@ -41,10 +41,9 @@ export const AuthContextProvider = (props) => {
   const tokenData = retrieveStoredToken();
   
   let initialToken;
-  let initialUser;
+  let initialUser = null;
   if (tokenData) {
     initialToken = tokenData.token;
-    initialUser = tokenData.user;
   }
 
   const [token, setToken] = useState(initialToken);
