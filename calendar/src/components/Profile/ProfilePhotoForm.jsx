@@ -54,10 +54,8 @@ const ProfilePhotoForm = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         setIsLoading(false);
         if (res.ok) {
-          console.log("Picture has been updated!");
           toast.success('🦄 Picture updated!', {
             position: "bottom-center",
             autoClose: 2000,
