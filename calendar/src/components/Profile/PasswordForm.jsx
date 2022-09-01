@@ -1,6 +1,11 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 import AuthContext from '../../store/auth-context';
+
 import classes from './PasswordForm.module.css';
 
 const PasswordForm = () => {
@@ -13,8 +18,16 @@ const PasswordForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const switchAuthModeHandler = () => {
-    props.switchAuthModeHandler();
+  const updateFailed = () => {
+    toast.error('Update failed!', {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   const submitHandler = (event) => {
@@ -47,15 +60,24 @@ const PasswordForm = () => {
           return res.json();
         } else {
           return res.json().then((resp) => {
-            throw new Error(resp.new_password2[0]);
+            updateFailed();
+            console.log(resp.new_password2[0]);
           });
         }
       })
       .then((d) => {
-        alert("Profile updated!");
+        toast.success('🦄 Password updated!', {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => {
-        alert(err.message);
+        updateFailed();
       });
   };
 

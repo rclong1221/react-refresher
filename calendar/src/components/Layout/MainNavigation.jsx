@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import AuthContext from '../../store/auth-context';
 
@@ -15,6 +18,15 @@ const MainNavigation = () => {
   const logoutHandler = () => {
     authCtx.logout();
     // optional: redirect the user
+    toast.success(`Successfully logged out!`, {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     history.replace('/');
   };
 

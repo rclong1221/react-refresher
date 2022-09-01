@@ -2,6 +2,9 @@ import { useContext, useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import reactLogo from './assets/react.svg';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import MyCalendar from './components/Calendar/Calendar';
 import Layout from './components/Layout/Layout';
@@ -170,6 +173,17 @@ function App() {
           <ResendConfirmationForm></ResendConfirmationForm>
         </Route>
       </Switch>
+      <ToastContainer
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
     </Layout>
   )
 }

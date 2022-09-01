@@ -1,6 +1,11 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
 import AuthContext from '../../store/auth-context';
+
 import classes from './ProfileForm.module.css';
 
 const ProfileForm = () => {
@@ -16,6 +21,18 @@ const ProfileForm = () => {
   const user = authCtx.user;
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const updateFailed = () => {
+    toast.error('Update failed!', {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   useEffect(() => {
     if (user) {
@@ -33,8 +50,7 @@ const ProfileForm = () => {
           return res.json();
         } else {
           return res.json().then((resp) => {
-            let errorMessage = 'authentication failed!';
-            throw new Error(errorMessage);
+            console.log(resp);
           });
         }
       })
@@ -46,7 +62,7 @@ const ProfileForm = () => {
         middleNameInputRef.current.value = d.middle_name;
       })
       .catch((err) => {
-        alert(err.message);
+        console.log(err.message);
       });
       }
     }
@@ -90,16 +106,23 @@ const ProfileForm = () => {
           return res.json();
         } else {
           return res.json().then((resp) => {
-            let errorMessage = 'Authentication failed!';
-            throw new Error(errorMessage);
+            updateFailed();
           });
         }
       })
       .then((d) => {
-        alert("Profile updated!");
+        toast.success('🦄 Profile updated!', {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => {
-        alert(err.message);
+        updateFailed();
       });
   };
 
