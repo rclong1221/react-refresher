@@ -62,7 +62,7 @@ const RegisterForm = (props) => {
         history.replace('/confirm-email/');
       })
       .catch((err) => {
-        alert(err.message);
+        console.log(err.message);
       });
   };
 

@@ -56,7 +56,6 @@ const PasswordForm = () => {
       .then((res) => {
         setIsLoading(false);
         if (res.ok) {
-          alert(res);
           return res.json();
         } else {
           return res.json().then((resp) => {
