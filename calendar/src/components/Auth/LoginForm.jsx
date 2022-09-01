@@ -1,5 +1,8 @@
 import { useContext, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import classes from './AuthForm.module.css';
 
@@ -13,6 +16,18 @@ const LoginForm = (props) => {
   const authCtx = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
 
+  const loginFailed = () => {
+    toast.error('Log in failed!', {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
   const switchAuthModeHandler = () => {
     props.switchAuthModeHandler();
   }
@@ -23,7 +38,7 @@ const LoginForm = (props) => {
     const enteredUsername = usernameInputRef.current.value;
     const enteredPassword1 = password1InputRef.current.value;
 
-    // optional: Add validation
+    // optional: Add validations
 
     setIsLoading(true);
     let url = 'http://127.0.0.1:8000/rest-auth/login/';;
@@ -44,12 +59,7 @@ const LoginForm = (props) => {
         return res.json();
       } else {
         return res.json().then((resp) => {
-          let errorMessage = 'Authentication failed!';
-          // if (resp && resp.error && resp.error.message) {
-          //   errorMessage = resp.error.message;
-          // }
-
-          throw new Error(errorMessage);
+          loginFailed();
         });
       }
     }).then((d) => {
@@ -57,13 +67,10 @@ const LoginForm = (props) => {
       const expirationTime = new Date(
         new Date().getTime()
       );
-      
       const token = d.key;
 
       expirationTime.setTime(expirationTime.getTime() + numOfHours * 60 * 60 * 1000);
       
-      
-
       fetch('http://127.0.0.1:8000/api/users/me/', {
         method: 'GET',
         headers: {
@@ -83,15 +90,23 @@ const LoginForm = (props) => {
         }
       }).then((user) => {
         authCtx.user = user;
-        
+        toast.success(`🦄 Welcome, ${user.username}!`, {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         authCtx.login(token, expirationTime.toISOString(), user);
 
         history.replace('/calendar/');
       }).catch((err) => {
-        alert(err.message);
+        loginFailed();
       });
     }).catch((err) => {
-      alert(err.message);
+      loginFailed();
     });
   };
 
