@@ -22,12 +22,10 @@ const ProfilePhoto = () => {
       })
       .then((res) => {
           if (res.ok) {
-          console.log(res);
           return res.json();
           } else {
           return res.json().then((resp) => {
-              let errorMessage = 'Authentication failed!';
-              throw new Error(errorMessage);
+              console.log('Authentication failed!');
           });
           }
       })
@@ -36,7 +34,7 @@ const ProfilePhoto = () => {
           setProfilePhoto(`http://127.0.0.1:8000${d.image}`);
       })
       .catch((err) => {
-          alert(err.message);
+        console.log(err);
       });
       }
     }
